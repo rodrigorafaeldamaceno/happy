@@ -43,11 +43,7 @@ export default {
 
     const orphanagesRepository = getRepository(Orphanage);
 
-    const orphanage = await orphanagesRepository.findOneOrFail(id, { relations:['images'] })
-      .catch((error) => {
-        return res.status().json(error)
-      }
-    );
+    const orphanage = await orphanagesRepository.findOneOrFail(id, { relations:['images'] });
 
     return res.json(orphanageView.render(orphanage));
   },
