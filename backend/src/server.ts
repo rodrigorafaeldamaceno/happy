@@ -1,13 +1,12 @@
 import express from 'express';
 
 import './database/connection';
+import routes from './routes';
 
 const app = express();
 
 app.use(express.json());
 
-app.get('/users', async (req, res)=>{
-  return res.json({ status: 'online' });
-});
+app.use(routes);
 
 app.listen(3333);
