@@ -1,4 +1,4 @@
-import { Request, Response } from  'express';
+import { request, Request, Response } from  'express';
 import { getRepository } from "typeorm";
 import Orphanage from '../models/Orphanage';
 
@@ -8,8 +8,22 @@ export default {
   
     const orphanagesRepository = getRepository(Orphanage);
   
+    const requestImages = req.files as Express.Multer.File[];
+
+    const images = requestImages.map((image)=>{
+      return { path: image.filename }
+    });
+    console.log(images);
+
     const orphanages = orphanagesRepository.create({
-      name, latitude, longitude, about, opening_hours, open_on_weekends, instructions
+      name,
+      latitude,
+      longitude,
+      about,
+      opening_hours,
+      open_on_weekends,
+      instructions,
+      images,
     })
   
     await orphanagesRepository.save(orphanages);
