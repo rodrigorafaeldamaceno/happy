@@ -1,12 +1,15 @@
-import React from 'react'
-import { FiPlus } from 'react-icons/fi';
-import { Map, TileLayer } from 'react-leaflet';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { FiPlus } from "react-icons/fi";
+import { Map, TileLayer, Marker } from "react-leaflet";
+import { Link } from "react-router-dom";
 
-import mapMarkerImg from '../images/logo.svg';
+import mapMarkerImg from "../images/map-marker.svg";
+import Leaflet from "leaflet";
 
-import '../styles/pages/orphanages_map.css';
-import 'leaflet/dist/leaflet.css';
+import "../styles/pages/orphanages_map.css";
+import "leaflet/dist/leaflet.css";
+
+const mapIcon = Leaflet.icon({ iconUrl: mapMarkerImg });
 
 function OrphanagesMap() {
   return (
@@ -28,9 +31,11 @@ function OrphanagesMap() {
       <Map
         center={[-25.290964, -54.0971119]}
         zoom={15}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: "100%", height: "100%" }}
       >
         <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+        <Marker position={[-25.290964, -54.0971119]} icon={mapIcon} />
       </Map>
 
       <Link to="" className="create-orphanage">
@@ -40,4 +45,4 @@ function OrphanagesMap() {
   );
 }
 
-export default OrphanagesMap
+export default OrphanagesMap;
